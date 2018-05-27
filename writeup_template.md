@@ -35,6 +35,7 @@ I tried various combinations of parameters starting from orientation of 9 and pi
 <p>Test Accuracy of SVC =  0.9471</p>
 <p>0.00255 Seconds to predict 10 labels with SVC</p>
 
+=============================================================
 colorspace = 'YUV'
 
 orient = 11
@@ -55,6 +56,7 @@ Test Accuracy of SVC =  0.9403
 
 
 
+=============================================================
 colorspace = 'RGB'
 
 orient = 11
@@ -75,6 +77,7 @@ Test Accuracy of SVC =  0.94
 
 
 
+=============================================================
 colorspace = 'RGB'
 
 orient = 10
@@ -95,6 +98,7 @@ Test Accuracy of SVC =  0.9375
 
 
 
+=============================================================
 colorspace = 'YUV'
 
 orient = 11
@@ -114,6 +118,7 @@ Test Accuracy of SVC =  0.9775
 0.00243 Seconds to predict 10 labels with SVC
 
 
+=============================================================
 
 I ended up with best values of:
 
@@ -184,13 +189,12 @@ Apply the heatmap to the image creates the following:
 
 Ultimately I searched on two scales using YUV, 3-channel HOG features plus spatially binned color and histograms of color in the feature vector, which provided a nice result.  Here are some example images from the pipeline:
 
-<img src="output_images/compare-0.png" width="320" alt="Combined Image" />
-<img src="output_images/compare-1.png" width="320" alt="Combined Image" />
-<img src="output_images/compare-2.png" width="320" alt="Combined Image" />
-<img src="output_images/compare-3.png" width="320" alt="Combined Image" />
-<img src="output_images/compare-4.png" width="320" alt="Combined Image" />
-<img src="output_images/compare-5.png" width="320" alt="Combined Image" />
-<img src="output_images/compare-6.png" width="320" alt="Combined Image" />
+<img src="output_images/compare-0.png" width="800" alt="Combined Image" />
+<img src="output_images/compare-1.png" width="800" alt="Combined Image" />
+<img src="output_images/compare-2.png" width="800" alt="Combined Image" />
+<img src="output_images/compare-3.png" width="800" alt="Combined Image" />
+<img src="output_images/compare-4.png" width="800" alt="Combined Image" />
+<img src="output_images/compare-5.png" width="800" alt="Combined Image" />
 
 When I wrote the original classifier, using the lesson materials and that implmented RGB and YCbCr based features, I found that I was getting to many false positives or the reverse--no cars found. By optimizing the method to use the YUV space, which has shown great results in finding lane lines and signs (previous projects) I was able to detect cars with less false positives. Adding multiple passes by changing the window sizes and sclae/overlap allowed more chances for a car to be detected as well. Using the heatmap then rejected further false positives.
 

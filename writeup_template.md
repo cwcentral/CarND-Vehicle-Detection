@@ -9,13 +9,13 @@ The goals / steps of this project are the following:
 
 ---
 
-The code for this project is contained in [the Jupyter notebook file in this repo](./P5.ipynb) (P5.ipynb)
+The code for this project is contained in [the Jupyter notebook file](./P5.ipynb) (P5.ipynb)
 
 ---
 
-```
-"Sections" mentioned in the follow are references to the jupyter notebook file P5.ipynb.
-```
+
+*"Sections"* mentioned here are references to the jupyter notebook file P5.ipynb.
+
 
 #### 1. HOG features from the training images.
 
@@ -135,7 +135,7 @@ With the above settings in Section 2, I was averaging about 97% accuracy with my
 
 In the section labeled **Goal 2**, I used the find_cars() method explained in the lesson materials. I convert the image to YUV, scale & normalize the image, and extracted hog features for the entire image. Using the full image hog features, I used the sub-window (from the sliding window technique) containing those features, then extracted the color features of that sub-sampled image. The resulting feature vector is fed that into the SVM classifier. If the classifier found a match, i.e. a car, its bounding box is recorded. The list of bounding boxes are then processed for false positives. 
 
-<img src="output_images/find_cars.png" width="480" alt="Combined Image" />
+<img src="output_images/find_cars.png" width="480" title="Result of the Sliding Windows Technique" />
 
 ##### Multi-Scale Search
 
@@ -154,7 +154,9 @@ I ended up with the following algorithm of scales, hence I would call find_cars(
 | 400   | 545   |  1.5  |
 | 450   | 500   |  1.0  |
 
-<img src="output_images/find_cars_2.png" width="480" alt="Combined Image" />
+<img src="output_images/find_cars_2.png" width="480" title="Result of Multiscale Search" />
+
+
 
 To remove false positives, such as the cars moving in the opposite lane/direction, I applied the following:
 
@@ -164,21 +166,26 @@ To remove false positives, such as the cars moving in the opposite lane/directio
 
 For example, the heat map on test image #1 using my classifier produces the following. I applied the scipy.ndimage.measurements.label() function to create a area that defines the heatmap as contiguous areas.
 
-<img src="output_images/heatmap-1.png" width="480" alt="Combined Image" />
+<img src="output_images/heatmap-1.png" width="480" title="Result of Applying a Heatmap" />
+
 
 In the section labeled *Goal 3&4*, I apply the heatmap to the image having the following result:
 
-<img src="output_images/heatmap-2.png" width="480" alt="Combined Image" />
+<img src="output_images/heatmap-2.png" width="480" title="Final result of Pipeline" />
+
 
 #### 2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
 
-Here are some example images from the pipeline:
+I used example images from the test directory and applied them to the pipeline. The result:
 
-<img src="output_images/heats.png" width="1280" alt="Combined Image" />
+<img src="output_images/heats.png" width="1280" title="Examples using Pipeline" />
+
+
+*Discussion: Optimization*
 
 When I wrote the original classifier, using the lesson materials implemented RGB and YCbCr based features, I found that I was getting too many false positives or the reverse--no cars found. By optimizing the method to use the YUV space, previously shown great results in *Advanced Lane Finding*, I was able to detect cars with less false positives. Adding multiple passes by changing the window sizes and scale/overlap allowed more chances for a car to be detected as well. Using the heatmap then rejected further false positives. 
 
-The pipeline is expressed in *Section 8*.
+The pipeline is described in *Section 8*.
 
 ### Video Implementation
 

@@ -23,9 +23,9 @@ In *Section 3*, I started by reading in all the `vehicle` and `non-vehicle` imag
 
 <img src="output_images/samples.png" width="480" alt="Combined Image" />
 
-I then tried extracting features by color/spatial elements only. This is shown in *Section 5*. I Then tried to define a SVM classifier based on these features. This is shown in *Section 6*. As you can tell, the accuracy was around 90%, not very good. Hence I applied HOG features to my algorithm. 
+I then tried extracting features by color/spatial elements only. This is shown in *Section 5*. I trained an SVM classifier based on these features. This is shown in *Section 6*. As you can tell, the accuracy was around 90%, not very good. Hence I applied HOG features to my training algorithm. 
 
-I then explored different color spaces and different `skimage.hog()` parameters (`orientations`, `pixels_per_cell`, and `cells_per_block`).  I grabbed random images from each of the two classes and displayed them to get a feel for what the `skimage.hog()` output looks like.
+I explored different color spaces and different `skimage.hog()` parameters (`orientations`, `pixels_per_cell`, and `cells_per_block`).  I grabbed random images from each of the two classes and displayed them to get a feel for what the `skimage.hog()` output looks like.
 
 I created a method using a Histogram of Gradients called get_hog_features() in **Section 7** of the project code. This is similar to the method provided in the lesson. We apply the input car and non-car images to get HOG images, for example:
 
@@ -113,7 +113,7 @@ spatial size = 32
 histogram bins = 32
 ```
 
-I choose to bias accuracy over speed as I later applied an averaging and cropping algorithm to reduce the process required (e.g. the sky and opposite lane). Also, the YUV colorspace proved best compared to YCrCb, RGB, HSV and HSL which created too many false positives in their application. The reasoning to go YUV was also based on the previous project *Advanced Lane Finding*. In that project image quality was the main source of false positives, and the tracking of the white lines (similar to white car in this project) where processing images in the YUV colorspace proved effective. 
+I choose to bias accuracy over speed as I later applied an averaging and cropping algorithm to reduce the processing required (e.g. the sky and opposite lane). Also, the YUV colorspace proved best compared to YCrCb, RGB, HSV and HSL which created too many false positives in their application. The reasoning to go YUV was also based on the previous project *Advanced Lane Finding*. In that project image quality was the main source of false positives, and the tracking of the white lines (similar to white car in this project) where processing images in the YUV colorspace proved effective. 
 
 #### 3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
 
@@ -133,7 +133,7 @@ With the above settings in Section 2, I was averaging about 97% accuracy with my
 
 #### 1. Describe how (and identify where in your code) you implemented a sliding window search.  How did you decide what scales to search and how much to overlap windows?
 
-In the section labeled **Goal 2**, I used the find_cars() method explained in the lesson materials. I convert the image to YUV, scale & normalize the image, and extracted hog features for the entire image. Using the full image hog features, I used the window containing those features, then extracted the color features of that sub-sampled image. Then that vector is fed that into the SVM classifier. If the classifier found a match, i.e. a car, the bounding box is recorded. The list of bounding boxes are then processed for false positives. 
+In the section labeled **Goal 2**, I used the find_cars() method explained in the lesson materials. I convert the image to YUV, scale & normalize the image, and extracted hog features for the entire image. Using the full image hog features, I used the sub-window (from the sliding window technique) containing those features, then extracted the color features of that sub-sampled image. The resulting feature vector is fed that into the SVM classifier. If the classifier found a match, i.e. a car, its bounding box is recorded. The list of bounding boxes are then processed for false positives. 
 
 <img src="output_images/find_cars.png" width="480" alt="Combined Image" />
 
@@ -166,17 +166,19 @@ For example, the heat map on test image #1 using my classifier produces the foll
 
 <img src="output_images/heatmap-1.png" width="480" alt="Combined Image" />
 
-In the section labeled *Goal 3&4*, I apply the heatmap to the image creates the following:
+In the section labeled *Goal 3&4*, I apply the heatmap to the image having the following result:
 
 <img src="output_images/heatmap-2.png" width="480" alt="Combined Image" />
 
 #### 2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
 
-Ultimately I searched on two scales using YUV, 3-channel HOG features plus spatially binned color and histograms of color in the feature vector, which provided a nice result.  Here are some example images from the pipeline:
+Here are some example images from the pipeline:
 
 <img src="output_images/heats.png" width="1280" alt="Combined Image" />
 
-When I wrote the original classifier, using the lesson materials and that implemented RGB and YCbCr based features, I found that I was getting too many false positives or the reverse--no cars found. By optimizing the method to use the YUV space, previously shown great results in *Advanced Lane Finding*, I was able to detect cars with less false positives. Adding multiple passes by changing the window sizes and scale/overlap allowed more chances for a car to be detected as well. Using the heatmap then rejected further false positives.
+When I wrote the original classifier, using the lesson materials implemented RGB and YCbCr based features, I found that I was getting too many false positives or the reverse--no cars found. By optimizing the method to use the YUV space, previously shown great results in *Advanced Lane Finding*, I was able to detect cars with less false positives. Adding multiple passes by changing the window sizes and scale/overlap allowed more chances for a car to be detected as well. Using the heatmap then rejected further false positives. 
+
+The pipeline is expressed in *Section 8*.
 
 ### Video Implementation
 
@@ -186,10 +188,16 @@ When I wrote the original classifier, using the lesson materials and that implem
 
 * Here's the pipeline output of the [project video component](./video_output_long.mp4)
 
+The application of the videos are expressed in the section labeled *Goal 3*.
 
 #### 2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
 
-In order to reduce false positives, I cropped the image to only report boxes from the car's view. I also only took cars that had heatmaps of a certain size (5000px or a rectangle of 50x100). Lastly, for the streaming video, I also used the previous image's heatmap to enhance the detection of a car since it is unlikely for a car to "jump" in location. This is expressed in the section label *Section 8* of the P5.ipynb file.
+In order to reduce false positives:
+* I cropped the image search area to only report boxes from the car's view and the lanes to the right (since the car was in the left lane). 
+* I also only took cars that had heatmaps of a certain size (5000px or a rectangle of 50x100). 
+* Lastly, for the streaming video, I also used the previous image's heatmap to enhance the detection of a car since it is unlikely for a car to "jump" in location. 
+
+These filter techniques are expressed in the section label *Section 8* of the P5.ipynb file.
 
 ---
 

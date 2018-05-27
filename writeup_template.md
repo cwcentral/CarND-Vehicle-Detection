@@ -26,54 +26,103 @@ I created a method using a Histogram of Gradients called get_hog_features(). We 
 I tried various combinations of parameters starting from orientation of 9 and pixels per cell of 8 in the class examples. For example:
 
 colorspace = 'YUV'
+
 orient = 10 
+
 pix_per_cell = 15
+
 cell_per_block = 2
+
 hog_channel = 'ALL'
+
 51.01 Seconds to extract HOG features...
+
 9.13 Seconds to train SVC...
+
 Test Accuracy of SVC =  0.9471
+
 0.00255 Seconds to predict 10 labels with SVC
 
+
 colorspace = 'YUV'
+
 orient = 11
+
 pix_per_cell = 14
+
 cell_per_block = 2
+
 hog_channel = 'ALL' 
+
 49.09 Seconds to extract HOG features...
+
 12.12 Seconds to train SVC...
+
 Test Accuracy of SVC =  0.9403
+
 0.00241 Seconds to predict 10 labels with SVC
 
+
+
 colorspace = 'RGB'
+
 orient = 11
+
 pix_per_cell = 15
+
 cell_per_block = 2
+
 hog_channel = 'ALL'
+
 53.39 Seconds to extract HOG features...
+
 11.52 Seconds to train SVC...
+
 Test Accuracy of SVC =  0.94
+
 0.00427 Seconds to predict 10 labels with SVC
 
+
+
 colorspace = 'RGB'
+
 orient = 10
+
 pix_per_cell = 14
+
 cell_per_block = 2
+
 hog_channel = 'ALL'
+
 51.6 Seconds to extract HOG features...
+
 10.9 Seconds to train SVC...
+
 Test Accuracy of SVC =  0.9375
+
 0.00247 Seconds to predict 10 labels with SVC
 
+
+
 colorspace = 'YUV'
+
 orient = 11
+
 pix_per_cell = 16
+
 cell_per_block = 2
+
 hog_channel = 'ALL'
+
 62.04 Seconds to extract HOG features...
+
 12.48 Seconds to train SVC...
+
 Test Accuracy of SVC =  0.9775
+
 0.00243 Seconds to predict 10 labels with SVC
+
+
 
 I ended up with best values of:
 

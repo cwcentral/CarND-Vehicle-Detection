@@ -9,12 +9,12 @@ The goals / steps of this project are the following:
 
 ---
 
-The code for this project is contained in [the Jupyter notebook file](./P5.ipynb) (P5.ipynb)
+The code for this project is contained in [the Jupyter notebook file ./p5.ipynb] (p5.ipynb)
 
 ---
 
 
-*"Sections"* mentioned here are references to the jupyter notebook file P5.ipynb.
+*"Sections"* mentioned here are references to the jupyter notebook file [p5.ipynb](p5.ipynb).
 
 
 #### 1. HOG features from the training images.
@@ -117,7 +117,7 @@ I choose to bias accuracy over speed as I later applied an averaging and croppin
 
 #### 3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
 
-The classifier of choice I used was a Linear Support Vector Machine. This is listed in section labeled **Goal 1** of the P5.ipynb file. I attempted to use color features into the SVM. In order to train the classifier:
+The classifier of choice I used was a Linear Support Vector Machine. This is listed in section labeled **Goal 1** of the [p5.ipynb](p5.ipynb) file. I attempted to use color features into the SVM. In order to train the classifier:
 
 1. I extract the hog features in YUV space of the cars and non-car images.
 2. Create an array stack of feature vectors 
@@ -191,9 +191,11 @@ The pipeline is described in *Section 8*.
 
 #### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (somewhat wobbly or unstable bounding boxes are ok as long as you are identifying the vehicles most of the time with minimal false positives.)
 
-* Here's the pipeline output of the [short video component](./video_output.mp4)
+* Here's the pipeline output of the short video component:
+[![Output](out_short.png)](https://youtu.be/kIQxw0tCPHQ "Click to Play Video")
 
-* Here's the pipeline output of the [project video component](./video_output_long.mp4)
+* Here's the pipeline output of the project video component:
+[![Output](out_long.png)](https://youtu.be/WdoH5_FG734 "Click to Play Video")
 
 The application of the videos are expressed in the section labeled *Goal 3*.
 
@@ -204,7 +206,7 @@ In order to reduce false positives:
 * I also only took cars that had heatmaps of a certain size (5000px or a rectangle of 50x100). 
 * Lastly, for the streaming video, I also used the previous image's heatmap to enhance the detection of a car since it is unlikely for a car to "jump" in location. 
 
-These filter techniques are expressed in the section label *Section 8* of the P5.ipynb file.
+These filter techniques are expressed in the section label *Section 8* of the [p5.ipynb](p5.ipynb) file.
 
 ---
 

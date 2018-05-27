@@ -25,55 +25,95 @@ I created a method using a Histogram of Gradients called get_hog_features(). We 
 
 I tried various combinations of parameters starting from orientation of 9 and pixels per cell of 8 in the class examples. For example:
 
-colorspace = 'YUV'
-orient = 10 
-pix_per_cell = 15
-cell_per_block = 2
-hog_channel = 'ALL'
-51.01 Seconds to extract HOG features...
-9.13 Seconds to train SVC...
-Test Accuracy of SVC =  0.9471
-0.00255 Seconds to predict 10 labels with SVC
+<p>colorspace = 'YUV'</p>
+<p>orient = 10</p>
+<p>pix_per_cell = 15</p>
+<p>cell_per_block = 2</p>
+<p>hog_channel = 'ALL'</p>
+<p>51.01 Seconds to extract HOG features...</p>
+<p>9.13 Seconds to train SVC...</p>
+<p>Test Accuracy of SVC =  0.9471</p>
+<p>0.00255 Seconds to predict 10 labels with SVC</p>
 
 colorspace = 'YUV'
+
 orient = 11
+
 pix_per_cell = 14
+
 cell_per_block = 2
+
 hog_channel = 'ALL' 
+
 49.09 Seconds to extract HOG features...
+
 12.12 Seconds to train SVC...
+
 Test Accuracy of SVC =  0.9403
+
 0.00241 Seconds to predict 10 labels with SVC
 
+
+
 colorspace = 'RGB'
+
 orient = 11
+
 pix_per_cell = 15
+
 cell_per_block = 2
+
 hog_channel = 'ALL'
+
 53.39 Seconds to extract HOG features...
+
 11.52 Seconds to train SVC...
+
 Test Accuracy of SVC =  0.94
+
 0.00427 Seconds to predict 10 labels with SVC
 
+
+
 colorspace = 'RGB'
+
 orient = 10
+
 pix_per_cell = 14
+
 cell_per_block = 2
+
 hog_channel = 'ALL'
+
 51.6 Seconds to extract HOG features...
+
 10.9 Seconds to train SVC...
+
 Test Accuracy of SVC =  0.9375
+
 0.00247 Seconds to predict 10 labels with SVC
 
+
+
 colorspace = 'YUV'
+
 orient = 11
+
 pix_per_cell = 16
+
 cell_per_block = 2
+
 hog_channel = 'ALL'
+
 62.04 Seconds to extract HOG features...
+
 12.48 Seconds to train SVC...
+
 Test Accuracy of SVC =  0.9775
+
 0.00243 Seconds to predict 10 labels with SVC
+
+
 
 I ended up with best values of:
 
@@ -112,16 +152,17 @@ I used the find_cars() method explained in the lesson materials. I convert he im
 For the pipeline, we need to have search windows of varying sizes to handle the multiscale effect of cars driving away or entering view of our car. 
 
 I ended up with the following algorithm that adds find cars of various sliding window sizes:
-| y-start | y-end   | scale  |
-| :-----: | :-----: | -----: |
-| 400     | 475     |  1.0   |
-| 420     | 490     |  1.0   |
-| 400     | 525     |  1.5   |
-| 450     | 600     |  1.5   |
-| 400     | 600     |  2.0   |
-| 405     | 600     |  2.0   |
-| 400     | 545     |  1.5   |
-| 450     | 500     |  1.0   |
+
+| y-start   | y-end   | scale   |
+| ---	|---	|---	|
+| 400   | 475   |  1.0  |
+| 420   | 490   |  1.0  |
+| 400   | 525   |  1.5  |
+| 450   | 600   |  1.5  |
+| 400   | 600   |  2.0  |
+| 405   | 600   |  2.0  |
+| 400   | 545   |  1.5  |
+| 450   | 500   |  1.0  |
 
 <img src="output_images/find_cars_2.png" width="480" alt="Combined Image" />
 

@@ -192,10 +192,10 @@ The pipeline is described in *Section 8*.
 #### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (somewhat wobbly or unstable bounding boxes are ok as long as you are identifying the vehicles most of the time with minimal false positives.)
 
 * Here's the pipeline output of the short video component:
-[![Output](out_short.png)](https://youtu.be/kIQxw0tCPHQ "Click to Play Video")
+[![Output](output_images/out_short.png)](https://youtu.be/kIQxw0tCPHQ "Click to Play Video")
 
 * Here's the pipeline output of the project video component:
-[![Output](out_long.png)](https://youtu.be/WdoH5_FG734 "Click to Play Video")
+[![Output](output_images/out_long.png)](https://youtu.be/WdoH5_FG734 "Click to Play Video")
 
 The application of the videos are expressed in the section labeled *Goal 3*.
 

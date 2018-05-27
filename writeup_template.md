@@ -36,6 +36,7 @@ I tried various combinations of parameters starting from orientation of 9 and pi
 <p>0.00255 Seconds to predict 10 labels with SVC</p>
 
 =============================================================
+
 colorspace = 'YUV'
 
 orient = 11
@@ -57,6 +58,7 @@ Test Accuracy of SVC =  0.9403
 
 
 =============================================================
+
 colorspace = 'RGB'
 
 orient = 11
@@ -78,6 +80,7 @@ Test Accuracy of SVC =  0.94
 
 
 =============================================================
+
 colorspace = 'RGB'
 
 orient = 10
@@ -99,6 +102,7 @@ Test Accuracy of SVC =  0.9375
 
 
 =============================================================
+
 colorspace = 'YUV'
 
 orient = 11
@@ -197,13 +201,14 @@ When I wrote the original classifier, using the lesson materials and that implme
 
 #### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (somewhat wobbly or unstable bounding boxes are ok as long as you are identifying the vehicles most of the time with minimal false positives.)
 
-Here's the pipeline output of the short video component [link to my video result](./video_output.mp4)
-Here's the pipeline output of the project video component [link to my video result](./video_output_long.mp4)
+* Here's the pipeline output of the [short video component](./video_output.mp4)
+
+* Here's the pipeline output of the [project video component](./video_output_long.mp4)
 
 
 #### 2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
 
-In order to reduce false positives, I cropped the image to only report boxes from the car's view. I also only took cars that had heatmmaps of a certain size (>60x60). Lastly, for the streaming video, I also used the previous image's heatmap to enhance the detection of a car since it is unlikely for a car to "jump" in location. This is expressed in section 81, starting at line 42 and line 71.                           
+In order to reduce false positives, I cropped the image to only report boxes from the car's view. I also only took cars that had heatmmaps of a certain size (5000px or a rectangle of 50x100). Lastly, for the streaming video, I also used the previous image's heatmap to enhance the detection of a car since it is unlikely for a car to "jump" in location. This is expressed in section 81, starting at line 42 and line 71.                           
 
 ---
 
@@ -211,4 +216,12 @@ In order to reduce false positives, I cropped the image to only report boxes fro
 
 #### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
+Again, like the advanced lane-finding project, image quality (lighting, contrast, viewing angle) was critical and a major problem using this method. Lighting contributed to sensitive search results: slight adjustments to the sliding window technique either resulted in a large number of false positives or not vehicle detected at all. 
 
+It appeared the white cars were hard to detect, such that techiques used in the advanced lane finding project could be used here.
+
+Speed vs accuracy during classification is important, and I choose to bias accuracy over speed. If I choose speed I would have likely gotten more false positives. Regardless, the sliding window approach is somewhat inefficient as it requires multiple searches to get a consensus, hence why I had to implement multiple calls to find_cars().
+
+Lastly, with my filtering and averaging techniques, this fairly worked well on this type of road: a straight lane. My cars switching lanes or large cruves in the lane would likely cause my pipeline to generate lots of false positives and fail.
+
+As for comparsion to a CNN approach, the CNN will better indentify cars much faster and can leverage better computation resources. The SVM technique can be used as an additional too to identify false positives.

@@ -9,7 +9,7 @@ The goals / steps of this project are the following:
 
 ---
 
-The code for this project is contained in [the Jupyter notebook file ./p5.ipynb] (p5.ipynb)
+The code for this project is contained in [the Jupyter notebook file p5.ipynb](p5.ipynb)
 
 ---
 
@@ -27,7 +27,7 @@ I then tried extracting features by color/spatial elements only. This is shown i
 
 I explored different color spaces and different `skimage.hog()` parameters (`orientations`, `pixels_per_cell`, and `cells_per_block`).  I grabbed random images from each of the two classes and displayed them to get a feel for what the `skimage.hog()` output looks like.
 
-I created a method using a Histogram of Gradients called get_hog_features() in **Section 7** of the project code. This is similar to the method provided in the lesson. We apply the input car and non-car images to get HOG images, for example:
+I created a method using a Histogram of Gradients called get_hog_features() in *Section 7* of the project code. This is similar to the method provided in the lesson. We apply the input car and non-car images to get HOG images, for example:
 
 <img src="output_images/hog_out.png" width="480" alt="Combined Image" />
 
@@ -127,7 +127,7 @@ The classifier of choice I used was a Linear Support Vector Machine. This is lis
 6. Train the SVM classifier with the training data
 7. Verify the model by using the test data (aka the predict() method) and develop a testing accuracy value.
 
-With the above settings in Section 2, I was averaging about 97% accuracy with my configuration.
+With the above settings in *Section 2*, I was averaging about 97% accuracy with my configuration.
 
 ### Sliding Window Search
 

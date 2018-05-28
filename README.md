@@ -9,7 +9,7 @@ The goals / steps of this project are the following:
 
 ---
 
-The code for this project is contained in [the Jupyter notebook file ./p5.ipynb] (p5.ipynb)
+The code for this project is contained in [the Jupyter notebook file p5.ipynb](p5.ipynb)
 
 ---
 
